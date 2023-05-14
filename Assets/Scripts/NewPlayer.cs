@@ -10,7 +10,8 @@ public class NewPlayer : MonoBehaviour
 
     public float strength = 5f;
     public float gravity = -9.81f;
-    public float tilt = 5f;
+    public float tiltUp = 5f;    // Tilt angle for upward movements
+    public float tiltDown = 155f; // Increased tilt angle for downward movements
     public bool isCollided;
 
     void Awake()
@@ -35,16 +36,17 @@ public class NewPlayer : MonoBehaviour
             return;
         }
 
-        
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             rb.velocity = Vector2.up * strength;
+            rb.rotation = -tiltUp; // Rotate the bird upwards
         }
-
-        rb.velocity += Vector2.up * gravity * Time.deltaTime;
-
-        float angle = Mathf.Lerp(0f, -tilt, rb.velocity.y / 3f);
-        rb.rotation = angle;
+        else
+        {
+            rb.velocity += Vector2.up * gravity * Time.deltaTime;
+            float angle = Mathf.Lerp(0f, tiltDown, rb.velocity.y / 3f);
+            rb.rotation = angle - 10; // Rotate the bird downwards
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
