@@ -5,7 +5,6 @@ public class GroundMovement : MonoBehaviour
     public static GroundMovement Instance; // Singleton instance
     
     public float speed = 5f; // Adjust this value to control the speed of the ground movement
-    public float endOffset = 1f; // Adjust this value to set an additional offset from the end position
 
     private float endPosition;
 
@@ -52,7 +51,8 @@ public class GroundMovement : MonoBehaviour
         Renderer[] childRenderers = GetComponentsInChildren<Renderer>();
 
         // Initialize the total length
-        float totalLength = 0f;
+        float totalLength = 0;
+        int groundsCount = 0;
 
         // Iterate through each child renderer and accumulate the length
         foreach (Renderer renderer in childRenderers)
@@ -60,13 +60,14 @@ public class GroundMovement : MonoBehaviour
             if (renderer.CompareTag("Ground"))  
             {
                 totalLength += renderer.bounds.size.x;
-                Debug.Log($"Xes: {renderer.bounds.size.x}");
+                groundsCount += 1;
             }
         }
 
-        Debug.Log($"Total length: {totalLength}");
+        float lengthOfGround = totalLength / groundsCount;
 
+        float computedOffset = lengthOfGround + lengthOfGround / 1.1f;
         // Calculate the end position based on the total length and the offset
-        endPosition = transform.position.x - totalLength - endOffset;
+        endPosition = transform.position.x - totalLength + computedOffset;
     }
 }
