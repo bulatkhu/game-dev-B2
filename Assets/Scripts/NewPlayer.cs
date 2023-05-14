@@ -10,7 +10,7 @@ public class NewPlayer : MonoBehaviour
 
     public float strength = 5f;
     public float gravity = -9.81f;
-    public float tiltUp = 5f;    // Tilt angle for upward movements
+    public float tiltUp = 155f;    // Tilt angle for upward movements
     public float tiltDown = 155f; // Increased tilt angle for downward movements
     public bool isCollided;
 
@@ -36,10 +36,10 @@ public class NewPlayer : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
         {
             rb.velocity = Vector2.up * strength;
-            rb.rotation = -tiltUp; // Rotate the bird upwards
+            rb.rotation = tiltUp; // Set the rotation angle to tiltUp when looking upwards
         }
         else
         {
