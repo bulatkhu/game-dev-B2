@@ -11,7 +11,7 @@ public class NewPlayer : MonoBehaviour
     public float strength = 5f;
     public float gravity = -9.81f;
     public float tilt = 5f;
-    private bool isCollided;
+    public bool isCollided;
 
     void Awake()
     {
@@ -55,10 +55,11 @@ public class NewPlayer : MonoBehaviour
             isCollided = true;
         }
         
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Obstacle"))
         {
             // Player has collided with the ground component
             Debug.Log("Player collided with the ground!");
+            GroundMovement.Instance.StopMovement();
         }
     }
 
