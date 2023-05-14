@@ -54,6 +54,12 @@ public class NewPlayer : MonoBehaviour
         {
             isCollided = true;
         }
+        
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            // Player has collided with the ground component
+            Debug.Log("Player collided with the ground!");
+        }
     }
 
     private void Start()
