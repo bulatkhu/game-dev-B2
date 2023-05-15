@@ -15,6 +15,7 @@ public class NewPlayer : MonoBehaviour
     public float tiltUp = 155f;    // Tilt angle for upward movements
     public float tiltDown = 155f; // Increased tilt angle for downward movements
     public bool isDisabled = false;
+    public bool isFuelDraining = false;
 
     void Awake()
     {
@@ -45,12 +46,14 @@ public class NewPlayer : MonoBehaviour
         {
             rb.velocity = Vector2.up * strength;
             rb.rotation = tiltUp; // Set the rotation angle to tiltUp when looking upwards
+            isFuelDraining = true;
         }
         else
         {
             rb.velocity += Vector2.up * gravity * Time.deltaTime;
             float angle = Mathf.Lerp(0f, tiltDown, rb.velocity.y / 3f);
             rb.rotation = angle - 10; // Rotate the bird downwards
+            isFuelDraining = false;
         }
     }
 

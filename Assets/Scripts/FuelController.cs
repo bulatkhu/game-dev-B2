@@ -31,9 +31,12 @@ public class FuelController : MonoBehaviour
         {
             return;
         }
-        
-        _currentFuelAmount -= Time.deltaTime * _fuelDrainSpeed;
-        UpdateUI();
+
+        if (NewPlayer.instance.isFuelDraining)
+        {
+            _currentFuelAmount -= Time.deltaTime * _fuelDrainSpeed;
+            UpdateUI();
+        }
 
         if (_currentFuelAmount <= 0f)
         {
