@@ -6,7 +6,7 @@ public class FuelController : MonoBehaviour
     public static FuelController instance;
 
     [SerializeField] private Image _fuelImage;
-    [SerializeField, Range(10f, 50f)] private float _fuelDrainSpeed = 1f;
+    [SerializeField, Range(10f, 50f)] private float _fuelDrainSpeed = 5f;
     [SerializeField] private float _maxFuelAmount = 100f;
 
     private float _currentFuelAmount;
@@ -42,6 +42,12 @@ public class FuelController : MonoBehaviour
         {
             NewPlayer.instance.GameOver();
         }
+    }
+
+    public void FillFuel()
+    {
+        var newFuelAmount = _currentFuelAmount + 20;
+        _currentFuelAmount = newFuelAmount > _maxFuelAmount ? _maxFuelAmount : newFuelAmount;
     }
 
     private void UpdateUI()

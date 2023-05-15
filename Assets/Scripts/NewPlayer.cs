@@ -65,6 +65,12 @@ public class NewPlayer : MonoBehaviour
             Debug.Log("Player collided with the ground!");
             GameOver();
         }
+
+        if (collision.gameObject.CompareTag("Fuel"))
+        {
+            FuelController.instance.FillFuel();
+            Destroy(collision.gameObject);
+        }
     }
 
     private void Start()
