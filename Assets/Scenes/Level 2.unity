@@ -1831,7 +1831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fuelImage: {fileID: 1113018040}
-  _fuelDrainSpeed: 25
+  _fuelDrainSpeed: 63
   _maxFuelAmount: 100
 --- !u!4 &1326545096
 Transform:
