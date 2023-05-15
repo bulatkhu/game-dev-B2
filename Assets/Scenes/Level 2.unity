@@ -1911,7 +1911,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Fuel
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7968606919817192897, guid: eb1cc3034340bdb43b3f6e18320e343c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eb1cc3034340bdb43b3f6e18320e343c, type: 3}
 --- !u!4 &1357220586 stripped
 Transform:
