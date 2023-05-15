@@ -3,21 +3,27 @@
 public class NewPlayer : MonoBehaviour
 {
     private Rigidbody2D rb;
-    
+
     private SpriteRenderer spriteRenderer;
     public Sprite[] sprites;
     private int spriteIndex;
 
+    public static NewPlayer instance;
+    
     public float strength = 5f;
     public float gravity = -9.81f;
     public float tiltUp = 155f;    // Tilt angle for upward movements
     public float tiltDown = 155f; // Increased tilt angle for downward movements
-    public bool isCollided;
+    public bool isDisabled = false;
 
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
     
     private void OnEnable()
@@ -26,12 +32,11 @@ public class NewPlayer : MonoBehaviour
         position.y = 0f;
         transform.position = position;
         rb.velocity = Vector2.zero;
-        isCollided = false;
     }
 
     private void Update()
     {
-        if (isCollided)
+        if (isDisabled)
         {
             return;
         }
@@ -51,17 +56,11 @@ public class NewPlayer : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log($"GO: {collision.gameObject.name}");
-        if (!isCollided)
-        {
-            isCollided = true;
-        }
-        
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Obstacle"))
         {
             // Player has collided with the ground component
             Debug.Log("Player collided with the ground!");
-            GroundMovement.Instance.StopMovement();
+            GameOver();
         }
     }
 
@@ -72,6 +71,11 @@ public class NewPlayer : MonoBehaviour
 
     private void AnimateSprite()
     {
+        if (isDisabled)
+        {
+            return;
+        }
+        
         spriteIndex++;
 
         if (spriteIndex >= sprites.Length) {
@@ -81,5 +85,11 @@ public class NewPlayer : MonoBehaviour
         if (spriteIndex < sprites.Length && spriteIndex >= 0) {
             spriteRenderer.sprite = sprites[spriteIndex];
         }
+    }
+
+    public void GameOver()
+    {
+        GroundMovement.Instance.StopMovement();
+        isDisabled = true;
     }
 }
