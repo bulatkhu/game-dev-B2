@@ -41,7 +41,7 @@ public class GroundMovement : MonoBehaviour
         if (transform.position.x <= endPosition)
         {
             // Stop the ground movement
-            StopMovement();
+            // StopMovement();
         }
     }
 
