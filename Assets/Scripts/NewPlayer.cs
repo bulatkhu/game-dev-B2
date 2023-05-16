@@ -38,14 +38,14 @@ public class NewPlayer : MonoBehaviour
     }
     
     // FixedUpdate is called at fixed timesteps instead of frames (default: 0.02s = 50fps)
-    private void FixedUpdate()
-    {
-        // For continuous input you can use FixedUpdate
-        if (Input.GetKey(KeyCode.A))
-            rb.AddForce(speed * Vector2.left);
-        if (Input.GetKey(KeyCode.D))
-            rb.AddForce(speed * Vector2.right);
-    }
+    // private void FixedUpdate()
+    // {
+    //     // For continuous input you can use FixedUpdate
+    //     if (Input.GetKey(KeyCode.A))
+    //         rb.AddForce(speed * Vector2.left);
+    //     if (Input.GetKey(KeyCode.D))
+    //         rb.AddForce(speed * Vector2.right);
+    // }
     
     private void OnEnable()
     {
