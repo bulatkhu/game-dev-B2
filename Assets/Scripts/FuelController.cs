@@ -46,7 +46,7 @@ public class FuelController : MonoBehaviour
 
     public void FillFuel()
     {
-        var newFuelAmount = _currentFuelAmount + 20;
+        var newFuelAmount = _currentFuelAmount + 50;
         _currentFuelAmount = newFuelAmount > _maxFuelAmount ? _maxFuelAmount : newFuelAmount;
     }
 
