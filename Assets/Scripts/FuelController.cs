@@ -6,6 +6,7 @@ public class FuelController : MonoBehaviour
     public static FuelController instance;
 
     [SerializeField] private Image _fuelImage;
+    [SerializeField] private Text _fuelText;
     [SerializeField, Range(10f, 90f)] private float _fuelDrainSpeed = 80f;
     [SerializeField] private float _maxFuelAmount = 100f;
 
@@ -53,5 +54,6 @@ public class FuelController : MonoBehaviour
     private void UpdateUI()
     {
         _fuelImage.fillAmount = (_currentFuelAmount / _maxFuelAmount);
+        _fuelText.text = _currentFuelAmount < 0 ? "0" : _currentFuelAmount.ToString("F");
     }
 }
