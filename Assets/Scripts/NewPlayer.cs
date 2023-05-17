@@ -26,6 +26,7 @@ public class NewPlayer : MonoBehaviour
 
     // A PhysicsMaterial2D lets you adjust friction and bounciness of an object
     [SerializeField] PhysicsMaterial2D bounceMaterial;
+    [SerializeField] PhysicsMaterial2D frictionMaterial;
 
     void Awake()
     {
@@ -82,17 +83,29 @@ public class NewPlayer : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Obstacle"))
+        if (isCollided)
         {
-            // Player has collided with the ground component
-            Debug.Log("Player collided with the ground!");
-            GameOver();
+            return;
         }
-
+        
         if (collision.gameObject.CompareTag("Fuel"))
         {
             FuelController.instance.FillFuel();
             Destroy(collision.gameObject);
+            return;
+        }
+        
+        Debug.Log($"Player collided with the {collision.gameObject.tag}");
+        GameOver();
+
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            rb.sharedMaterial = frictionMaterial;
+        }
+        
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            rb.sharedMaterial = bounceMaterial;
         }
     }
 
@@ -101,9 +114,9 @@ public class NewPlayer : MonoBehaviour
         InvokeRepeating(nameof(AnimateSprite), 0.15f, 0.15f);
         // Linear drag is kind of like air resistance and will make the object fall down slower
         // More drag means that the object will also need more force to be moved
-        // rb.drag = 5f;
-        //
-        // // To prevent a rigidbody from rotating, you can click on the checkbox in the Component or set this value
+        rb.drag = 5f;
+        
+        // To prevent a rigidbody from rotating, you can click on the checkbox in the Component or set this value
         // rb.freezeRotation = false;
         //
         // // This sets the rigidbody's physics material 2D
@@ -123,10 +136,10 @@ public class NewPlayer : MonoBehaviour
     {
         // A tag is used to differentiate between different objects. When 'Shredder' is hit, 
         // Kirby should be destroyed. Otherwise a copy of this Kirby should spawn
-        if (collision.CompareTag("Shredder"))
-            Destroy(gameObject);
-        else
-            Instantiate(gameObject, spawnPosition.position, Quaternion.identity);
+        // if (collision.CompareTag("Shredder"))
+        //     Destroy(gameObject);
+        // else
+        //     Instantiate(gameObject, spawnPosition.position, Quaternion.identity);
 
         // Alternatively, you could put a script on different objects, like Shredder.cs or Spawner.cs
         // and let them handle instantiation and destruction, e.g. like this:
@@ -153,6 +166,8 @@ public class NewPlayer : MonoBehaviour
 
     public void GameOver()
     {
+        rb.drag = 0;
+        rb.velocity = new Vector2(rb.velocity.x * 2, jumpForce * 4);
         isCollided = true;
     }
 }
