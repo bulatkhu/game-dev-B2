@@ -62,7 +62,7 @@ public class FuelController : MonoBehaviour
     private void UpdateUI()
     {
         _fuelImage.fillAmount = (_currentFuelAmount / _maxFuelAmount);
-        _fuelText.text = _currentFuelAmount < 0 ? "0" : _currentFuelAmount.ToString("F");
+        _fuelText.text = (_currentFuelAmount < 0 ? "0" : _currentFuelAmount.ToString("F0")) + "%";
     }
 
     private void ShowEmptyText()

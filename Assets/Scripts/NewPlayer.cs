@@ -175,13 +175,13 @@ public class NewPlayer : MonoBehaviour
 
     public void GameOver()
     {
-        FuelRanOut();
         
         if (isCollided)
         {
             return;
         }
         
+        FuelRanOut();
         rb.velocity = new Vector2(rb.velocity.x * 2, jumpForce * 4);
     }
 }
