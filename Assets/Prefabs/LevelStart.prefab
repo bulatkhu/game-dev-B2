@@ -25,9 +25,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4531016503922225051}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 42.4165, y: 2.6615, z: 0.8761996}
+  m_LocalPosition: {x: 0.33, y: -0.17, z: 0.8761996}
   m_LocalScale: {x: 22.259148, y: 10.258129, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2710454159832492633}
   m_RootOrder: 1
@@ -107,8 +107,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8139464862894032833}
-  m_LocalRotation: {x: -0, y: -0, z: 1, w: -0.000031406995}
-  m_LocalPosition: {x: 84.12337, y: 5.324374, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -116,7 +116,7 @@ Transform:
   - {fileID: 4531016503922225052}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180.004}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!1001 &4531016505250732385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -138,11 +138,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6842856391381156293, guid: 8f2dfe58a574172458a1d8f5f7a3c181, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.93277
+      value: -11.12
       objectReference: {fileID: 0}
     - target: {fileID: 6842856391381156293, guid: 8f2dfe58a574172458a1d8f5f7a3c181, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.6607401
+      value: -0.17
       objectReference: {fileID: 0}
     - target: {fileID: 6842856391381156293, guid: 8f2dfe58a574172458a1d8f5f7a3c181, type: 3}
       propertyPath: m_LocalPosition.z
@@ -175,6 +175,10 @@ PrefabInstance:
     - target: {fileID: 6842856391381156293, guid: 8f2dfe58a574172458a1d8f5f7a3c181, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 6842856391381156293, guid: 8f2dfe58a574172458a1d8f5f7a3c181, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f2dfe58a574172458a1d8f5f7a3c181, type: 3}

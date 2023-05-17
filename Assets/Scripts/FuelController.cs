@@ -7,6 +7,7 @@ public class FuelController : MonoBehaviour
 
     [SerializeField] private Image _fuelImage;
     [SerializeField] private Text _fuelText;
+    [SerializeField] private GameObject _emptyTextBackground;
     [SerializeField, Range(10f, 90f)] private float _fuelDrainSpeed = 80f;
     [SerializeField] private float _maxFuelAmount = 100f;
 
@@ -28,11 +29,6 @@ public class FuelController : MonoBehaviour
 
     private void Update()
     {
-        if (NewPlayer.instance.isDisabled)
-        {
-            return;
-        }
-
         if (NewPlayer.instance.isFuelDraining)
         {
             _currentFuelAmount -= Time.deltaTime * _fuelDrainSpeed;
@@ -42,18 +38,45 @@ public class FuelController : MonoBehaviour
         if (_currentFuelAmount <= 0f)
         {
             NewPlayer.instance.GameOver();
+            ShowEmptyText();
         }
+    }
+
+    public bool HasFuel()
+    {
+        return _currentFuelAmount > 0;
     }
 
     public void FillFuel()
     {
+        if (NewPlayer.instance.isCollided)
+        {
+            return;
+        }
+
         var newFuelAmount = _currentFuelAmount + 50;
         _currentFuelAmount = newFuelAmount > _maxFuelAmount ? _maxFuelAmount : newFuelAmount;
+        HideEmptyText();
     }
 
     private void UpdateUI()
     {
         _fuelImage.fillAmount = (_currentFuelAmount / _maxFuelAmount);
         _fuelText.text = _currentFuelAmount < 0 ? "0" : _currentFuelAmount.ToString("F");
+    }
+
+    private void ShowEmptyText()
+    {
+        Debug.Log("Show empty text");
+        
+        _fuelText.text = "Empty";
+        _fuelText.color = Color.white;
+        _emptyTextBackground.SetActive(true);
+    }
+
+    private void HideEmptyText()
+    {
+        _emptyTextBackground.SetActive(false);
+        UpdateUI();
     }
 }

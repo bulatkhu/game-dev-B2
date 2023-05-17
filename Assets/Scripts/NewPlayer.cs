@@ -14,12 +14,12 @@ public class NewPlayer : MonoBehaviour
     public float gravity = -9.81f;
     public float tiltUp = 155f;    // Tilt angle for upward movements
     public float tiltDown = 155f; // Increased tilt angle for downward movements
-    public bool isDisabled = false;
     public bool isFuelDraining = false;
+    public bool isCollided = false;
     
     [SerializeField] Transform spawnPosition;
-    [SerializeField] float jumpForce = 5f;
-    [SerializeField] float speed = 10f;
+    [SerializeField] float jumpForce = 2f;
+    [SerializeField] float speed = 2f;
 
     // This will show a dropdown menu in the inspector where you can choose one or multiple layers
     [SerializeField] LayerMask collisionLayers;
@@ -57,11 +57,13 @@ public class NewPlayer : MonoBehaviour
 
     private void Update()
     {
-        if (isDisabled)
+        if (!FuelController.instance.HasFuel() || isCollided)
         {
             return;
         }
 
+        rb.velocity = new Vector2(speed, rb.velocity.y); // Set the constant horizontal velocity
+    
         if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
         {
             // rb.velocity = Vector2.up * strength;
@@ -133,7 +135,7 @@ public class NewPlayer : MonoBehaviour
 
     private void AnimateSprite()
     {
-        if (isDisabled)
+        if (!FuelController.instance.HasFuel() || isCollided)
         {
             return;
         }
@@ -151,7 +153,6 @@ public class NewPlayer : MonoBehaviour
 
     public void GameOver()
     {
-        GroundMovement.Instance.StopMovement();
-        isDisabled = true;
+        isCollided = true;
     }
 }
