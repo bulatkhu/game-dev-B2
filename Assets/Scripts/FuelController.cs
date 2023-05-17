@@ -54,7 +54,7 @@ public class FuelController : MonoBehaviour
             return;
         }
 
-        var newFuelAmount = _currentFuelAmount + 50;
+        var newFuelAmount = _currentFuelAmount < 0 ? 50 : _currentFuelAmount + 50;
         _currentFuelAmount = newFuelAmount > _maxFuelAmount ? _maxFuelAmount : newFuelAmount;
         HideEmptyText();
     }
