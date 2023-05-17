@@ -88,14 +88,6 @@ public class NewPlayer : MonoBehaviour
             return;
         }
         
-        if (collision.gameObject.CompareTag("Fuel"))
-        {
-            FuelController.instance.FillFuel();
-            Destroy(collision.gameObject);
-            return;
-        }
-        
-        Debug.Log($"Player collided with the {collision.gameObject.tag}");
         GameOver();
 
         if (collision.gameObject.CompareTag("Obstacle"))
@@ -134,6 +126,17 @@ public class NewPlayer : MonoBehaviour
     // This will be called every time Kirby hits a collider that has 'Is Trigger' checked
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.CompareTag("Obstacle"))
+        {
+            GameOver();
+            return;
+        }
+        
+        if (collision.gameObject.CompareTag("Fuel") && !isCollided)
+        {
+            FuelController.instance.FillFuel();
+            Destroy(collision.gameObject);
+        }
         // A tag is used to differentiate between different objects. When 'Shredder' is hit, 
         // Kirby should be destroyed. Otherwise a copy of this Kirby should spawn
         // if (collision.CompareTag("Shredder"))
@@ -164,10 +167,21 @@ public class NewPlayer : MonoBehaviour
         }
     }
 
-    public void GameOver()
+    public void FuelRanOut()
     {
         rb.drag = 0;
-        rb.velocity = new Vector2(rb.velocity.x * 2, jumpForce * 4);
         isCollided = true;
+    }
+
+    public void GameOver()
+    {
+        FuelRanOut();
+        
+        if (isCollided)
+        {
+            return;
+        }
+        
+        rb.velocity = new Vector2(rb.velocity.x * 2, jumpForce * 4);
     }
 }

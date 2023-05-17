@@ -37,7 +37,7 @@ public class FuelController : MonoBehaviour
 
         if (_currentFuelAmount <= 0f)
         {
-            NewPlayer.instance.GameOver();
+            NewPlayer.instance.FuelRanOut();
             ShowEmptyText();
         }
     }
@@ -67,8 +67,6 @@ public class FuelController : MonoBehaviour
 
     private void ShowEmptyText()
     {
-        Debug.Log("Show empty text");
-        
         _fuelText.text = "Empty";
         _fuelText.color = Color.white;
         _emptyTextBackground.SetActive(true);
