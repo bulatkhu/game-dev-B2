@@ -126,6 +126,11 @@ public class NewPlayer : MonoBehaviour
     // This will be called every time Kirby hits a collider that has 'Is Trigger' checked
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.CompareTag("Finish") && !isCollided)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.instance.goal);
+        }
+        
         if (collision.CompareTag("Obstacle"))
         {
             if (!isCollided)
