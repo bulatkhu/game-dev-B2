@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public class NewPlayer : MonoBehaviour
 {
@@ -57,9 +59,15 @@ public class NewPlayer : MonoBehaviour
         {
             AudioManager.instance.PlaySFX(AudioManager.instance.jump);
         }
+
+        if (restartText.gameObject.activeSelf && Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
         
         if (!FuelController.instance.HasFuel() || isCollided)
         {
+            isFuelDraining = false;
             return;
         }
 
@@ -124,7 +132,7 @@ public class NewPlayer : MonoBehaviour
         if (collision.CompareTag("Finish") && !isCollided)
         {
             AudioManager.instance.PlaySFX(AudioManager.instance.goal);
-            restartText.gameObject.SetActive(true);
+            ShowRestartLabel();
         }
         
         if (collision.CompareTag("Obstacle"))
@@ -177,7 +185,18 @@ public class NewPlayer : MonoBehaviour
     {
         rb.drag = 0;
     }
+    
+    private void ShowRestartLabel()
+    {
+        StartCoroutine(ShowTextDelayed());
+    }
 
+    private IEnumerator ShowTextDelayed()
+    {
+        yield return new WaitForSeconds(3);
+        restartText.gameObject.SetActive(true);
+    }
+    
     public void GameOver()
     {
         
@@ -189,7 +208,7 @@ public class NewPlayer : MonoBehaviour
         FuelRanOut();
         isCollided = true;
         rb.velocity = new Vector2(rb.velocity.x * 2, jumpForce * 4);
-        
-        restartText.gameObject.SetActive(true);
+
+        ShowRestartLabel();
     }
 }
