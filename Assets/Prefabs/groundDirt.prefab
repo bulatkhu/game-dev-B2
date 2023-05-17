@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6842856391381156293}
   - component: {fileID: 6842856391381156292}
   - component: {fileID: 6842856391381156294}
-  - component: {fileID: 6842856391381156295}
   m_Layer: 6
   m_Name: groundDirt
   m_TagString: Ground
@@ -87,62 +86,6 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!60 &6842856391381156294
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6842856391381156291}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.08, y: 0.71}
-    newSize: {x: 8.08, y: 0.71}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 3.6299999, y: 0.114999995}
-      - {x: 3.4299998, y: 0.355}
-      - {x: 2.54, y: 0.355}
-      - {x: 2.32, y: 0.16499999}
-      - {x: 1.9399999, y: 0.125}
-      - {x: 1.66, y: -0.16499999}
-      - {x: 1.31, y: -0.175}
-      - {x: 1.25, y: -0.13499999}
-      - {x: 1.05, y: -0.065}
-      - {x: 0.66999996, y: -0.065}
-      - {x: 0.61, y: -0.005}
-      - {x: 0.32999998, y: 0.255}
-      - {x: -0.29999998, y: 0.255}
-      - {x: -0.5, y: 0.145}
-      - {x: -0.53999996, y: 0.105}
-      - {x: -1, y: 0.125}
-      - {x: -1.18, y: 0.195}
-      - {x: -1.55, y: 0.33499998}
-      - {x: -1.62, y: 0.33499998}
-      - {x: -2.35, y: 0.305}
-      - {x: -2.48, y: 0.295}
-      - {x: -2.6, y: 0.175}
-      - {x: -2.78, y: 0.035}
-      - {x: -3.12, y: -0.055}
-      - {x: -3.61, y: -0.044999998}
-      - {x: -3.6899998, y: 0.044999998}
-      - {x: -4.04, y: 0.024999999}
-      - {x: -4.04, y: -0.355}
-      - {x: 4.04, y: -0.355}
-      - {x: 4.04, y: 0.015}
-      - {x: 4.02, y: 0.024999999}
---- !u!60 &6842856391381156295
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

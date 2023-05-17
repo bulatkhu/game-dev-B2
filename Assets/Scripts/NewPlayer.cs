@@ -99,18 +99,18 @@ public class NewPlayer : MonoBehaviour
         InvokeRepeating(nameof(AnimateSprite), 0.15f, 0.15f);
         // Linear drag is kind of like air resistance and will make the object fall down slower
         // More drag means that the object will also need more force to be moved
-        rb.drag = 5f;
-
-        // To prevent a rigidbody from rotating, you can click on the checkbox in the Component or set this value
-        rb.freezeRotation = false;
-
-        // This sets the rigidbody's physics material 2D
-        rb.sharedMaterial = bounceMaterial;
-
-        // This sets the layer the GameObject is on. You can set which layers collide with each other in the Layer Collision Matrix
-        gameObject.layer = 3;
-        // To avoid using the integer, you can also use this instead. Of course the layer needs to be created first
-        gameObject.layer = LayerMask.NameToLayer("IgnoreObstacles");
+        // rb.drag = 5f;
+        //
+        // // To prevent a rigidbody from rotating, you can click on the checkbox in the Component or set this value
+        // rb.freezeRotation = false;
+        //
+        // // This sets the rigidbody's physics material 2D
+        // rb.sharedMaterial = bounceMaterial;
+        //
+        // // This sets the layer the GameObject is on. You can set which layers collide with each other in the Layer Collision Matrix
+        // gameObject.layer = 3;
+        // // To avoid using the integer, you can also use this instead. Of course the layer needs to be created first
+        // gameObject.layer = LayerMask.NameToLayer("IgnoreObstacles");
 
         // On newer versions of Unity this sets the layers that should be ignored:
         // rb.excludeLayers = collisionLayers;
