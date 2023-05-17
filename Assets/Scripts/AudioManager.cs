@@ -4,19 +4,17 @@ public class AudioManager : MonoBehaviour
 {
     [Header("--------------- Audio Source ---------------")]
     [SerializeField] AudioSource musicSource;
-    [SerializeField] AudioSource SFXSource;
+    public AudioSource SFXSource;
 
     [Header("--------------- Audio Clip -----------------")]
     public AudioClip background;
     public AudioClip collision;
     public AudioClip jump;
-    // public AudioClip hit;
+    public AudioClip fuel;
     public AudioClip goal;
 
     public static AudioManager instance;
 
-    public bool isJumpingPlaying;
-    
     void Awake()
     {
         if (instance == null)

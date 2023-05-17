@@ -21,13 +21,6 @@ public class NewPlayer : MonoBehaviour
     [SerializeField] float jumpForce = 2f;
     [SerializeField] float speed = 2f;
 
-    // This will show a dropdown menu in the inspector where you can choose one or multiple layers
-    [SerializeField] LayerMask collisionLayers;
-
-    // A PhysicsMaterial2D lets you adjust friction and bounciness of an object
-    [SerializeField] PhysicsMaterial2D bounceMaterial;
-    [SerializeField] PhysicsMaterial2D frictionMaterial;
-
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -63,6 +56,11 @@ public class NewPlayer : MonoBehaviour
             return;
         }
 
+        if (isFuelDraining && !AudioManager.instance.SFXSource.isPlaying)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.instance.jump);
+        }
+
         rb.velocity = new Vector2(speed, rb.velocity.y); // Set the constant horizontal velocity
     
         if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
@@ -83,22 +81,17 @@ public class NewPlayer : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            AudioManager.instance.PlaySFX(AudioManager.instance.collision);
+        }
+        
         if (isCollided)
         {
             return;
         }
         
         GameOver();
-
-        if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            rb.sharedMaterial = frictionMaterial;
-        }
-        
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            rb.sharedMaterial = bounceMaterial;
-        }
     }
 
     private void Start()
@@ -144,6 +137,7 @@ public class NewPlayer : MonoBehaviour
         if (collision.gameObject.CompareTag("Fuel") && !isCollided)
         {
             FuelController.instance.FillFuel();
+            AudioManager.instance.PlaySFX(AudioManager.instance.fuel);
             Destroy(collision.gameObject);
         }
         // A tag is used to differentiate between different objects. When 'Shredder' is hit, 
@@ -179,7 +173,6 @@ public class NewPlayer : MonoBehaviour
     public void FuelRanOut()
     {
         rb.drag = 0;
-        isCollided = true;
     }
 
     public void GameOver()
@@ -191,6 +184,7 @@ public class NewPlayer : MonoBehaviour
         }
         
         FuelRanOut();
+        isCollided = true;
         rb.velocity = new Vector2(rb.velocity.x * 2, jumpForce * 4);
     }
 }
