@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class NewPlayer : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class NewPlayer : MonoBehaviour
     [SerializeField] Transform spawnPosition;
     [SerializeField] float jumpForce = 2f;
     [SerializeField] float speed = 2f;
+    [SerializeField] private Text restartText; 
 
     void Awake()
     {
@@ -51,14 +53,14 @@ public class NewPlayer : MonoBehaviour
 
     private void Update()
     {
+        if (isFuelDraining && !AudioManager.instance.SFXSource.isPlaying && !isCollided)
+        {
+            AudioManager.instance.PlaySFX(AudioManager.instance.jump);
+        }
+        
         if (!FuelController.instance.HasFuel() || isCollided)
         {
             return;
-        }
-
-        if (isFuelDraining && !AudioManager.instance.SFXSource.isPlaying)
-        {
-            AudioManager.instance.PlaySFX(AudioManager.instance.jump);
         }
 
         rb.velocity = new Vector2(speed, rb.velocity.y); // Set the constant horizontal velocity
@@ -122,6 +124,7 @@ public class NewPlayer : MonoBehaviour
         if (collision.CompareTag("Finish") && !isCollided)
         {
             AudioManager.instance.PlaySFX(AudioManager.instance.goal);
+            restartText.gameObject.SetActive(true);
         }
         
         if (collision.CompareTag("Obstacle"))
@@ -186,5 +189,7 @@ public class NewPlayer : MonoBehaviour
         FuelRanOut();
         isCollided = true;
         rb.velocity = new Vector2(rb.velocity.x * 2, jumpForce * 4);
+        
+        restartText.gameObject.SetActive(true);
     }
 }
