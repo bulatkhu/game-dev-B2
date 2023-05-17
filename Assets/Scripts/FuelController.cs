@@ -29,7 +29,7 @@ public class FuelController : MonoBehaviour
 
     private void Update()
     {
-        if (NewPlayer.instance.isFuelDraining)
+        if (NewPlayer.instance.isFuelDraining && !NewPlayer.instance.isCollided)
         {
             _currentFuelAmount -= Time.deltaTime * _fuelDrainSpeed;
             UpdateUI();

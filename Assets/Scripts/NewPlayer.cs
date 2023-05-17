@@ -128,6 +128,10 @@ public class NewPlayer : MonoBehaviour
     {
         if (collision.CompareTag("Obstacle"))
         {
+            if (!isCollided)
+            {
+                AudioManager.instance.PlaySFX(AudioManager.instance.collision);
+            }
             GameOver();
             return;
         }
