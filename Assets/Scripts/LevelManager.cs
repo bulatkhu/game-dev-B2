@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour
     
     public void StartLevel2()
     {
-        SceneManager.LoadScene("Scenes/Level 1");
+        SceneManager.LoadScene("Scenes/Level 2");
     }
     
     public void StartLevel3()
