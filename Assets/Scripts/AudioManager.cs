@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip jump;
     public AudioClip fuel;
     public AudioClip goal;
+    public AudioClip empty;
 
     public static AudioManager instance;
 

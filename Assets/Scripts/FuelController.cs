@@ -11,6 +11,8 @@ public class FuelController : MonoBehaviour
     [SerializeField, Range(10f, 90f)] private float _fuelDrainSpeed = 80f;
     [SerializeField] private float _maxFuelAmount = 100f;
 
+    private bool isEmpty;
+
     private float _currentFuelAmount;
     
     private void Awake()
@@ -37,6 +39,11 @@ public class FuelController : MonoBehaviour
 
         if (_currentFuelAmount <= 0f)
         {
+            if (!isEmpty)
+            {
+                AudioManager.instance.PlaySFX(AudioManager.instance.empty);
+                isEmpty = true;
+            }
             NewPlayer.instance.FuelRanOut();
             ShowEmptyText();
         }
@@ -54,6 +61,7 @@ public class FuelController : MonoBehaviour
             return;
         }
 
+        isEmpty = false;
         var newFuelAmount = _currentFuelAmount < 0 ? 50 : _currentFuelAmount + 50;
         _currentFuelAmount = newFuelAmount > _maxFuelAmount ? _maxFuelAmount : newFuelAmount;
         HideEmptyText();
