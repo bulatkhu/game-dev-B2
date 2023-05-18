@@ -24,6 +24,8 @@ public class NewPlayer : MonoBehaviour
     [SerializeField] float jumpForce = 2f;
     [SerializeField] float speed = 2f;
     [SerializeField] private Text restartText; 
+    
+    public delegate void TestDelegate(); // This defines what type of method you're going to call.
 
     void Awake()
     {
@@ -132,7 +134,7 @@ public class NewPlayer : MonoBehaviour
         if (collision.CompareTag("Finish") && !isCollided)
         {
             AudioManager.instance.PlaySFX(AudioManager.instance.goal);
-            ShowRestartLabel();
+            StartCoroutine(CallDelayed(() => SceneManager.LoadScene("Menu")));
         }
         
         if (collision.CompareTag("Obstacle"))
@@ -188,13 +190,13 @@ public class NewPlayer : MonoBehaviour
     
     private void ShowRestartLabel()
     {
-        StartCoroutine(ShowTextDelayed());
+        StartCoroutine(CallDelayed(() => restartText.gameObject.SetActive(true), 5));
     }
 
-    private IEnumerator ShowTextDelayed()
+    private IEnumerator CallDelayed(TestDelegate method, float secondsToWait = 3)
     {
-        yield return new WaitForSeconds(3);
-        restartText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(secondsToWait);
+        method();
     }
     
     public void GameOver()
