@@ -8,6 +8,7 @@ TagManager:
   - Scoring
   - Ground
   - Fuel
+  - Enemy
   layers:
   - Default
   - TransparentFX

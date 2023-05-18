@@ -142,7 +142,7 @@ public class NewPlayer : MonoBehaviour
             StartCoroutine(CallDelayed(() => SceneManager.LoadScene("Menu")));
         }
         
-        if (collision.CompareTag("Obstacle"))
+        if (collision.CompareTag("Obstacle") || collision.CompareTag("Enemy"))
         {
             if (!isCollided)
             {
