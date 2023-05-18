@@ -57,6 +57,11 @@ public class NewPlayer : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene("Menu");
+        }
+        
         if (isFuelDraining && !AudioManager.instance.SFXSource.isPlaying && !isCollided)
         {
             AudioManager.instance.PlaySFX(AudioManager.instance.jump);
