@@ -1,3 +1,6 @@
+Try it out here: https://simmer.io/@bulat/game-dev-b2
+
+
 Plane Glider (12 Points)
 In this exercise the player has to maneuver a plane through an obstacle course without crashing. The package can be found on the Assets tab. Please note that the SFX have different volume levels and have to be adjusted in code.
 1) Player Controller (4 Points)
